@@ -22,7 +22,7 @@ message ISBN {
     string isbn = 1;
 }
 
-// InventoryItem oobject to store inventory items
+// InventoryItem object to store inventory items
 message InventoryItem {
     int32 inventory_number = 1;
     oneof refers_to {
