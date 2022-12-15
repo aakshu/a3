@@ -44,7 +44,7 @@ class InventoryServicer(library_pb2_grpc.InventoryServicer):
             # add book to the DB since isbn is valid
             books[request.isbn] = new_book
             # create isbn object to return to the client
-            isbn_object = library_pb2.ISBN(isbn=request.isbn)
+            isbn_request = library_pb2.ISBN(isbn=request.isbn)
         else:
             # if isbn is not valid, throw error to client
             context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
@@ -52,7 +52,7 @@ class InventoryServicer(library_pb2_grpc.InventoryServicer):
             return library_pb2.ISBN()
 
         # return the isbn to the client
-        return isbn_object
+        return isbn_request
 
     # function to retrieve book details based on isbn provided
     def GetBook(self, request, context):
