@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package library;
+
+//The inventory service definition
+service Inventory {
+    rpc CreateBook (Book) returns (ISBN);
+    rpc GetBook (ISBN) returns (Book);
+}
+
+//book message containing details of book
+message Book {
+    string isbn = 1;
+    string title = 2;
+    string author = 3;
+    Genre genre = 4;
+    int32 publishing_year = 5;
+}
+
+// isbn object to pass because cannot pass strings to RPCs
+message ISBN {
+    string isbn = 1;
+}
+
+// InventoryItem oobject to store inventory items
+message InventoryItem {
+    int32 inventory_number = 1;
+    oneof refers_to {
+        Book book = 2;
+    }
+    Status status = 3;
+}
+
+// Genre enum 
+enum Genre {
+    UNSPECIFIED = 0;
+    HORROR = 1;
+    THRILLER = 2;
+    ROMANCE = 3;
+    KIDS = 4;
+}
+
+enum Status {
+    AVAILABLE = 0;
+    TAKEN = 1;
+}
